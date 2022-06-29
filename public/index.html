@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      ;(function (window) {
+        var theUA = window.navigator.userAgent.toLowerCase()
+        if (
+          (theUA.match(/msie\s\d+/) && theUA.match(/msie\s\d+/)[0]) ||
+          (theUA.match(/trident\s?\d+/) && theUA.match(/trident\s?\d+/)[0])
+        ) {
+          var ieVersion =
+            theUA.match(/msie\s\d+/)[0].match(/\d+/)[0] ||
+            theUA.match(/trident\s?\d+/)[0]
+          if (ieVersion < 10) {
+            var str =
+              'IE浏览器版本过低，无法正常显示，请升级IE浏览器至IE9以上，或使用谷歌浏览器进行访问。'
+            var str2 =
+              "推荐使用:<a href='https://www.baidu.com/s?ie=UTF-8&wd=%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8' target='_blank' style='color:#3AA0FF;'>谷歌</a>"
+            document.writeln(
+              "<pre class='fd-IE10-box'>" +
+                "<h2 style='padding-top:300px;margin:0'><strong>" +
+                str +
+                '<br/></strong></h2><h2>' +
+                str2 +
+                "</h2><h2 style='margin:0'><strong>如果你的使用的是双核浏览器,请切换到极速模式访问<br/></strong></h2></pre>"
+            )
+            document.execCommand('Stop')
+          }
+        }
+      })(window)
+    </script>
   </body>
 </html>

@@ -1,29 +1,44 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
+// 404页面
+const notFound = () => import("@/pages/notFound");
+// 首页
+const index = () => import("@/pages/index/index");
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    name: "home",
+    component: index,
+    meta: {
+      title: "主页"
+    }
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: "*",
+    name: "404",
+    component: notFound,
+    meta: {
+      title: "404 NOT FOUND"
+    }
   }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
-
-export default router
+});
+router.beforeEach((to, from, next) => {
+  // const rights = window.localStorage.getItem('username')
+  //   ? window.localStorage.getItem('username')
+  //   : ''
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
+});
+export default router;
