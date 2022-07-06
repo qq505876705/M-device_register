@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 // 404页面
 const notFound = () => import("@/pages/notFound");
 // 首页
-const index = () => import("@/pages/index/index");
+const index = () => import("@/pages/deviceRegister/index");
 const routes = [
   {
     path: "/",
@@ -14,6 +14,14 @@ const routes = [
     component: index,
     meta: {
       title: "主页"
+    }
+  },
+  {
+    path: "/deviceRegister",
+    name: "deviceRegister",
+    component: index,
+    meta: {
+      title: "仪器云|仪器安装注册记录"
     }
   },
   {

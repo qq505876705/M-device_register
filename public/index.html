@@ -18,32 +18,32 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
     <script>
-      ;(function (window) {
-        var theUA = window.navigator.userAgent.toLowerCase()
+      (function(window) {
+        var theUA = window.navigator.userAgent.toLowerCase();
         if (
           (theUA.match(/msie\s\d+/) && theUA.match(/msie\s\d+/)[0]) ||
           (theUA.match(/trident\s?\d+/) && theUA.match(/trident\s?\d+/)[0])
         ) {
           var ieVersion =
             theUA.match(/msie\s\d+/)[0].match(/\d+/)[0] ||
-            theUA.match(/trident\s?\d+/)[0]
+            theUA.match(/trident\s?\d+/)[0];
           if (ieVersion < 10) {
             var str =
-              'IE浏览器版本过低，无法正常显示，请升级IE浏览器至IE9以上，或使用谷歌浏览器进行访问。'
+              "IE浏览器版本过低，无法正常显示，请升级IE浏览器至IE9以上，或使用谷歌浏览器进行访问。";
             var str2 =
-              "推荐使用:<a href='https://www.baidu.com/s?ie=UTF-8&wd=%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8' target='_blank' style='color:#3AA0FF;'>谷歌</a>"
+              "推荐使用:<a href='https://www.baidu.com/s?ie=UTF-8&wd=%E8%B0%B7%E6%AD%8C%E6%B5%8F%E8%A7%88%E5%99%A8' target='_blank' style='color:#3AA0FF;'>谷歌</a>";
             document.writeln(
               "<pre class='fd-IE10-box'>" +
                 "<h2 style='padding-top:300px;margin:0'><strong>" +
                 str +
-                '<br/></strong></h2><h2>' +
+                "<br/></strong></h2><h2>" +
                 str2 +
                 "</h2><h2 style='margin:0'><strong>如果你的使用的是双核浏览器,请切换到极速模式访问<br/></strong></h2></pre>"
-            )
-            document.execCommand('Stop')
+            );
+            document.execCommand("Stop");
           }
         }
-      })(window)
+      })(window);
     </script>
   </body>
 </html>
