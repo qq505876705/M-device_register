@@ -7,13 +7,14 @@ Vue.use(VueRouter);
 const notFound = () => import("@/pages/notFound");
 // 首页
 const index = () => import("@/pages/deviceRegister/index");
+const test = () => import("@/pages/deviceRegister/qrCodeContentParse");
 const routes = [
   {
     path: "/",
     name: "home",
     component: index,
     meta: {
-      title: "主页"
+      title: "仪器云|仪器安装注册记录"
     }
   },
   {
@@ -24,6 +25,15 @@ const routes = [
       title: "仪器云|仪器安装注册记录"
     }
   },
+  {
+    path: "/test",
+    name: "test",
+    component: test,
+    meta: {
+      title: "仪器云|仪器安装注册记录"
+    }
+  },
+
   {
     path: "*",
     name: "404",

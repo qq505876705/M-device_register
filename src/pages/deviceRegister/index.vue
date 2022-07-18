@@ -26,7 +26,7 @@
               <el-option label="产品线" value=""></el-option>
             </el-select>
 
-            <el-input v-model="form.inputValue" class="fd-product-input">
+            <el-input v-model="form.inputValue" class="fd-product-input" @blur='handleSearch'>
               <i
                 slot="suffix"
                 class="el-icon-search fd-input-suffix"
@@ -69,14 +69,20 @@
         style="width: 100%"
         class="fd-mt20"
         ref="table"
+        :row-style="{ height: '60px' }"
+        :cell-style="{ padding: '0px' }"
       >
         <el-table-column
           min-width="150px"
+          show-overflow-tooltip
           :prop="item.key"
           :label="item.name"
           v-for="(item, index) in tableDataFields"
           :key="index"
         >
+          <template v-slot="props">
+            {{ props.row[item.key] || "--" }}
+          </template>
         </el-table-column>
       </el-table>
 
@@ -123,48 +129,48 @@ export default {
       tableDataFields: [],
       // 已经选中的表格数据
       checkListResult: [
-        "key1",
-        "key2",
-        "key3",
-        "key4",
-        "key5",
-        "key6",
-        "key7",
-        "key8"
+        "category",
+        "qcLevel",
+        "qcLot",
+        "qcName",
+        "qcNameEn",
+        "qcSn",
+        "qcSnAlias",
+        "qcType"
       ],
       // 所有的可选择字段名字以及关键字
       checkList: [
         {
           label: "注册事件",
-          value: "key1"
+          value: "category"
         },
         {
           label: "产品线",
-          value: "key2"
+          value: "qcLevel"
         },
         {
           label: "仪器型号",
-          value: "key3"
+          value: "qcLot"
         },
         {
           label: "使用机构",
-          value: "key4"
+          value: "qcName"
         },
         {
           label: "装机地点",
-          value: "key5"
+          value: "qcNameEn"
         },
         {
           label: "工程师（mobile）",
-          value: "key6"
+          value: "qcSn"
         },
         {
           label: "工号（mobile）",
-          value: "key7"
+          value: "qcSnAlias"
         },
         {
           label: "装机工程师",
-          value: "key8"
+          value: "qcType"
         },
         {
           label: "生产编号",
@@ -231,12 +237,14 @@ export default {
     /**
      * 处理input框的搜索图标点击事件
      */
-    handleSearch() {},
+    handleSearch() {
+      this.requestTableData();
+    },
     /**
      * 表格的页码变化，请求相关的数据
      */
     handleSizeChange(size) {
-      this.pagesize = size;
+      this.pageInfo.pageSize = size;
       this.pageInfo.currentPage = 1;
     },
     /**
@@ -295,9 +303,10 @@ export default {
     login() {
       const url = "/account/verifyLogin";
       const params = {
-        une: "admin", pwd: "Mcloud!"
+        une: "admin",
+        pwd: "Mcloud!"
       };
-      this.$axios.post(url, qs.stringify(params)).then(res => {
+      this.$axios.post(url, qs.stringify(params)).then((res) => {
         console.log(res, "res");
       });
     },
@@ -306,15 +315,21 @@ export default {
      */
     requestTableData() {
       const param = {
-        pageNum: 1,
-        pageSize: 10,
+        pageNum: this.pageInfo.currentPage,
+        pageSize: this.pageInfo.pageSize,
         category: 10,
         qcLot: "",
         model: "",
         qcName: ""
       };
-      this.$axios.post("/qc/10/list", qs.stringify(param)).then(res => {
+      this.$axios.post("/qc/10/list", qs.stringify(param)).then((res) => {
         const result = res.data;
+        this.pageInfo.currentPage = result.currPage;
+        this.pageInfo.pageSize = result.pageSize;
+        this.pageInfo.totalPages = result.totalPage;
+        this.pageInfo.total = result.totalResult;
+
+        this.formData = result.data;
         console.log(result, "result");
       });
     }
@@ -334,7 +349,7 @@ export default {
   padding: 15px 0;
   .fd-al-main {
     background-color: #fff;
-    height: 100%;
+    // height: 100%;
     width: 100%;
     padding: 20px;
     border-radius: 5px;

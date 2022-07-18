@@ -9,7 +9,7 @@ if (cooked[3]) {
   config["--apihost"] = cooked[3].split("=")[1];
   console.log(config, "config");
   process.env.VUE_APP_CUSTOM_API = config["--apihost"];
-  console.log("配置的自定义api " + process.env.VUE_APP_CUSTOM_API);
+  // console.log("配置的自定义api " + process.env.VUE_APP_CUSTOM_API);
 }
 
 module.exports = defineConfig({

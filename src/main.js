@@ -45,8 +45,8 @@ NProgress.configure({
 Axios.defaults.timeout = 30000;
 // 设置接口地址，本地测试则为代理的/api，发布环境则需要填为发布后的服务器地址
 Axios.defaults.baseURL = process.env.VUE_APP_CUSTOM_API || process.env.VUE_APP_BASE_URL;
-console.log(process.env.VUE_APP_BASE_URL, "---", Axios.defaults.baseURL);
-console.log(process.env.VUE_APP_CUSTOM_API, "process.env.VUE_APP_CUSTOM_API");
+// console.log(process.env.VUE_APP_BASE_URL, "---", Axios.defaults.baseURL);
+// console.log(process.env.VUE_APP_CUSTOM_API, "process.env.VUE_APP_CUSTOM_API");
 /** 获取指定前多少天的时间
 *
 * @param {number} n 前几天
