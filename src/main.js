@@ -4,6 +4,7 @@ import Axios from "axios";
 // 引入 ElementUI
 import { CheckboxGroup, Checkbox, Input, Pagination, DatePicker, Form, FormItem, TableColumn, Table, Option, Row, Col, DropdownMenu, DropdownItem, Dropdown, Message, Button, Select } from "element-ui";
 
+import FdGlobal from "./assets/js/common";
 import "element-ui/lib/theme-chalk/index.css";
 // 引入nprogress
 import NProgress from "nprogress";
@@ -32,7 +33,7 @@ Vue.use(CheckboxGroup);
 
 Vue.prototype.$axios = Axios;
 Vue.prototype.$message = Message;
-
+Vue.prototype.$common = new FdGlobal();
 // 请求进度条配置
 NProgress.configure({
   easing: "ease", // 动画方式
